@@ -1,0 +1,9 @@
+[2024-03-27 21:36:34] toddd: haii
+[2024-03-27 21:36:50] jhg: iya
+[2024-03-27 21:36:57] jhg: kenapa
+toddd: oi
+[2024-03-27 21:39:04] toddd: hahaha
+[2024-03-27 21:42:53] toddd: apa
+[2024-03-27 21:46:38] toddd: haii
+jhg [2024-03-27 15:47:41]: if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['pesan'])) {     $pesan = $_POST['pesan'];     $username = $_SESSION['username'];      if (!empty(trim($pesan))) {         // Mendapatkan waktu saat ini dalam format tanggal dan jam         $waktu = date("Y-m-d H:i:s");                  // Format pesan dengan waktu         $newContent = $username . " [" . $waktu . "]: " . $pesan . "\n";                  // Simpan pesan ke dalam file chat.txt         $chatFile = "chat.txt";         file_put_contents($chatFile, $newContent, FILE_APPEND | LOCK_EX);     } }
+toddd: haii

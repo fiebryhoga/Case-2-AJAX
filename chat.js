@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   "gap-3",
                   "mb-2"
                 );
-                // chatContent.classList.add("self-end", "items-end");
+
               } else {
                 containerPesan.classList.add(
                   "flex",
@@ -85,17 +85,8 @@ document.addEventListener("DOMContentLoaded", function () {
                   "gap-3",
                   "mb-2"
                 );
-                // chatContent.classList.add("self-start", "items-start");
-              }
 
-              // Buat elemen untuk menampilkan pesan dan nama pengirim
-              const chatContent = document.createElement("div");
-              chatContent.classList.add(
-                "flex",
-                "flex-col",
-                "items-start",
-                "mb-2"
-              );
+              }
 
               // Buat elemen untuk menampilkan foto profil
               const fotoProfil = document.createElement("div");
@@ -123,6 +114,13 @@ document.addEventListener("DOMContentLoaded", function () {
               const pesanElement = document.createElement("div");
               pesanElement.textContent = isiPesan;
 
+              const chatContent = document.createElement("div");
+              chatContent.classList.add(
+                "flex",
+                "flex-col",
+                "items-start",
+                "mb-2"
+              );
               if (pengirim === currentUsername) {
                 pesanElement.classList.add(
                   "bg-green-500",
