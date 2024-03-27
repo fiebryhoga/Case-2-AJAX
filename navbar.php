@@ -2,13 +2,13 @@
 <nav class="fixed flex flex-row bg-gray-200 h-16 w-full py-2 px-24 justify-center items-center md:justify-normal gap-10">
     <div class="flex flex-row gap-4 justify-center items-center w-[20em]">
         <img class="w-[3em]" src="Assets/Images/logo.png" alt="">
-        <h2 class="font-bold text-xl">Contact Person</h2>
+        <h2 class="font-bold text-xl text-[#0e3fe1]">Chat App</h2>
     </div>
 
-    <ul class="flex-row justify-center items-center px-6 w-auto hidden md:flex gap-24 font-medium">
+    <ul class="flex-row justify-center items-center px-6 w-auto hidden md:flex gap-24 font-normal">
         <li class="cursor-progress">Home</li>
         <li class="cursor-progress">product</li>
-        <li class="cursor-pointer text-orange-600">Chat</li>
+        <li class="cursor-pointer text-[#3994f0]">Chat</li>
         <li class="cursor-progress">More</li>
     </ul>
     <div class="items-center justify-center hidden md:flex">
@@ -26,7 +26,7 @@
                 <input type="text" class="w-full max-w-[160px] bg-white pl-2 text-base font-semibold outline-none hover:cursor-progress"
                     placeholder="" id="">
                 <input type="button" value="Search"
-                    class="bg-orange-500 p-2 rounded-tr-lg rounded-br-lg text-white font-semibold hover:bg-orange-700 cursor-progress transition-colors">
+                    class="bg-[#0e3fe1] p-2 rounded-tr-lg rounded-br-lg text-white font-semibold hover:bg-[#3994f0] cursor-progress transition-colors">
             </div>
         </div>
     </div>

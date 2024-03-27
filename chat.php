@@ -1,36 +1,29 @@
 <?php
 session_start();
 
-// Cek apakah pengguna sudah login atau belum
 if (!isset($_SESSION['username'])) {
-    // Jika belum, alihkan ke halaman login
     header("Location: index.php");
     exit();
 }
 
-// Dapatkan nama pengguna yang saat ini masuk
 $currentUsername = $_SESSION['username'];
 
-// Tangani pengiriman pesan dari form
+$currentProfilePic = isset($_SESSION['profile_picture']) ? $_SESSION['profile_picture'] : '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['pesan'])) {
-    // Mengambil data pesan dari form
     $pesan = $_POST['pesan'];
     $username = $_SESSION['username'];
 
-    // Memastikan pesan tidak kosong dan tidak hanya berisi username
     if (!empty(trim($pesan))) {
-        // Menyimpan pesan terbaru ke dalam file chat.txt
         $chatFile = "chat.txt";
         $newContent = $username . ": " . $pesan . "\n";
         file_put_contents($chatFile, $newContent, FILE_APPEND | LOCK_EX);
     }
 }
 
-// Membaca pesan dari file chat.txt
 $chatContent = file_get_contents("chat.txt");
 $pesanArray = explode("\n", $chatContent);
 
-// Menghapus pesan yang hanya berisi username tanpa pesan
 $pesanArray = array_filter($pesanArray, function ($pesan) {
     return !empty(trim($pesan));
 });
@@ -132,17 +125,11 @@ $pesanArray = array_filter($pesanArray, function ($pesan) {
         }
 
         .chatMessages {
-    max-height: 350px;
-    overflow-y: auto;
-    border-bottom: 1px solid #bcbcbc;
-    margin-bottom: 3px;
-}
-
-
-
-
-
-
+            max-height: 350px;
+            overflow-y: auto;
+            border-bottom: 1px solid #bcbcbc;
+            margin-bottom: 3px;
+        }
 
         .send-icon {
             width: 17px;
@@ -228,33 +215,43 @@ $pesanArray = array_filter($pesanArray, function ($pesan) {
                 </svg>
             </div>
             <div class="bg-white w-full rounded-b-xl px-6 pb-4 flex flex-col">
-            <div class="chatMessages flex flex-col min-h-[350px] pb-6 border-b-[1px] border-b-gray-200 mb-3" id="chatMessages">
-</div>
+                <div class="chatMessages flex flex-col min-h-[350px] pb-6 border-b-[1px] border-b-gray-200 mb-3"
+                    id="chatMessages">
+                </div>
 
 
 
-                <form id="chatForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <div class="flex justify-between items-center mb-3">
-        <input id="messageInput" name="pesan" class="w-[260px] outline-none placeholder:text-xs placehplder:text-gray-300 placeholder:opacity-60 placeholder:tracking-wide text-sm text-gray-500 tracking-wide" type="text" placeholder="Masukkan Pesan ...">
-<input type="hidden" id="currentUsername" value="<?php echo $_SESSION['username']; ?>">
-        <button type="submit" id="sendMessage">
-            <svg class="send-icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-                <g>
-                    <g>
-                        <path fill="#6B6C7B" d="M481.508,210.336L68.414,38.926c-17.403-7.222-37.064-4.045-51.309,8.287C2.86,59.547-3.098,78.551,1.558,96.808 L38.327,241h180.026c8.284,0,15.001,6.716,15.001,15.001c0,8.284-6.716,15.001-15.001,15.001H38.327L1.558,415.193 c-4.656,18.258,1.301,37.262,15.547,49.595c14.274,12.357,33.937,15.495,51.31,8.287l413.094-171.409 C500.317,293.862,512,276.364,512,256.001C512,235.638,500.317,218.139,481.508,210.336z">
-                        </path>
-                    </g>
-                </g>
-            </svg>
-        </button>
-    </div>
-</form>
+                <form id="chatForm" method="post" action="<?php echo htmlspecialchars($_SERVER[" PHP_SELF"]); ?>">
+                    <div class="flex justify-between items-center mb-3">
+                        <input id="messageInput" name="pesan"
+                            class="w-[260px] outline-none placeholder:text-xs placehplder:text-gray-300 placeholder:opacity-60 placeholder:tracking-wide text-sm text-gray-500 tracking-wide"
+                            type="text" placeholder="Masukkan Pesan ...">
+                        <input type="hidden" id="currentUsername" value="<?php echo $_SESSION['username']; ?>">
+                        <!-- Tambahkan input hidden untuk menyimpan URL foto profil -->
+                        <input type="hidden" id="currentProfilePic" value="<?php echo $_SESSION['profile_picture']; ?>">
+
+                        <button type="submit" id="sendMessage">
+                            <svg class="send-icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+                                style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                                <g>
+                                    <g>
+                                        <path fill="#6B6C7B"
+                                            d="M481.508,210.336L68.414,38.926c-17.403-7.222-37.064-4.045-51.309,8.287C2.86,59.547-3.098,78.551,1.558,96.808 L38.327,241h180.026c8.284,0,15.001,6.716,15.001,15.001c0,8.284-6.716,15.001-15.001,15.001H38.327L1.558,415.193 c-4.656,18.258,1.301,37.262,15.547,49.595c14.274,12.357,33.937,15.495,51.31,8.287l413.094-171.409 C500.317,293.862,512,276.364,512,256.001C512,235.638,500.317,218.139,481.508,210.336z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
 
 
 
             </div>
 
         </div>
+        <?php include 'footer.php'?>
 
 
     </section>

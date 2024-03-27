@@ -2,19 +2,15 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Mengambil data dari form
     $username = $_POST['username'];
 
-    // Menyimpan file foto profil
     $target_dir = "Assets/Uploads/";
     $target_file = $target_dir . basename($_FILES["profile"]["name"]);
     move_uploaded_file($_FILES["profile"]["tmp_name"], $target_file);
 
-    // Menyimpan username dan path file foto profil ke dalam sesi
     $_SESSION['username'] = $username;
     $_SESSION['profile_picture'] = $target_file;
 
-    // Mengalihkan pengguna ke halaman index.php
     header("Location: chat.php");
     exit();
 }
@@ -67,6 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
         </div>
     </section>
+
 </body>
 
 </html>
