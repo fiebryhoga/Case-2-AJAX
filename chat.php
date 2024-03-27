@@ -15,8 +15,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['pesan'])) {
     $username = $_SESSION['username'];
 
     if (!empty(trim($pesan))) {
+        // Mendapatkan waktu saat ini
+        date_default_timezone_set('Asia/Jakarta'); // Atur zona waktu sesuai kebutuhan
+        $waktu = date("Y-m-d H:i:s");
+
+        // Format pesan yang akan disimpan
+        $newContent = "[" . $waktu . "] " . $username . ": " . $pesan . "\n";
+
+        // Menyimpan pesan ke dalam file chat.txt
         $chatFile = "chat.txt";
-        $newContent = $username . ": " . $pesan . "\n";
         file_put_contents($chatFile, $newContent, FILE_APPEND | LOCK_EX);
     }
 }
@@ -27,7 +34,6 @@ $pesanArray = explode("\n", $chatContent);
 $pesanArray = array_filter($pesanArray, function ($pesan) {
     return !empty(trim($pesan));
 });
-
 ?>
 
 <!DOCTYPE html>
