@@ -171,3 +171,6 @@ document.addEventListener("DOMContentLoaded", function () {
   loadChat();
   setInterval(loadChat, 1000);
 });
+
+
+//
